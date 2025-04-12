@@ -38,7 +38,7 @@ class GrafoEnron:
                         if remetente and destinatarios:
                             for destinatario in destinatarios:
                                 self._adicionar_aresta(remetente, destinatario)
-                except Exception:
+                except Exception as e:
                     continue
 
 
@@ -185,8 +185,7 @@ class GrafoEnron:
                 inconsistencias.append(f"   - {v} → entrada: {entrada}, saída: {saida}")
 
         if inconsistencias:
-            problemas.append("❌ Grau de entrada ≠ grau de saída em alguns vértices:")
-            problemas.extend(inconsistencias)
+            problemas.append("❌ Grau de entrada ≠ grau de saída em alguns vértices.")
 
         if not self._eh_fortemente_conexo():
             problemas.append("❌ O grafo não é fortemente conexo.")
@@ -314,7 +313,7 @@ if __name__ == "__main__":
     print("Top 20 saída:", grafo.top_20_grau_saida())
     print("Top 20 entrada:", grafo.top_20_grau_entrada())
     euleriano, motivos = grafo.grafo_euleriano()
-    print("É Euleriano?", euleriano)
+    print(f"O grafo {'É' if euleriano else 'NÃO é'} Euleriano:")
     if not euleriano:
         for m in motivos:
             print(" -", m)
